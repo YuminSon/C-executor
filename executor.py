@@ -50,12 +50,14 @@ def build_command():
     get_dependencies(main)
     if externs:
         handle_externs()
-    sources_repr = f'{" ".join(sources)} ' if sources else ''
-    return f'gcc -I {" -I ".join(dirs)} {sources_repr}-o {main_file[:-2]} {main_file}'
+    dirs_repr = f' -I {" -I ".join(dirs)} ' if dirs else ' '
+    sources_repr = f'{" ".join(sources)}' if sources else ''
+    return f'gcc{dirs_repr}{sources_repr} -o {main_file[:-2]} {main_file}'
 
 
 main, *dirs = argv[1:]
-dirs = dirs[0].split(';')
+if dirs:
+    dirs = dirs[0].split(';')
 main_dir, main_file = dirname(main), basename(main)
 search_dirs = {folder: listdir(folder) for folder in [main_dir] + dirs}
 search_dirs[main_dir].remove(main_file)
