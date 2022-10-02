@@ -21,4 +21,4 @@ GCC command generator/executor for use with VSCode Code Runner
 - Suitable for small projects. The executor handles `extern`s and declarations by reserving all files with their column-zero occurances for compilation. Better more than less, right?
 
 ## License
-MIT
+BSD 3-Clause
